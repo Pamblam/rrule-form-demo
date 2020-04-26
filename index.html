@@ -16,24 +16,20 @@ and open the template in the editor.
 		
 		<p>A very simple, completely unstyled copy of the iCalendar new event form for generating recurrence rules. It includes code to prepopulate the form from existing rrules. For reference and as a starting point for projects that require user to specify complex recurring events.</p>
 		
-		<div class='rrule-scheduler'>
-
+		<div class='rrule-scheduler' id='recurcomponent'>
 			<div>
 				<label>All day? <input type='checkbox' class=all_day /></label>
 			</div>
-
 			<div>
 				<label>Starts at: </label>
 				<input type=date class=start_date>
 				<input type=time class=start_time>
 			</div>
-
 			<div>
 				<label>Ends at: </label>
 				<input type=date class=end_date>
 				<input type=time class=end_time>
 			</div>
-
 			<div>
 				<label>Repeat: </label>
 				<select class='repeat_type'>
@@ -45,7 +41,6 @@ and open the template in the editor.
 					<option value=custom>Custom</option>
 				</select>
 			</div>
-
 			<div class='frequency_options' style=display:none>
 				<div>
 					<label>Frequency: </label>
@@ -120,7 +115,6 @@ and open the template in the editor.
 						<label><input type=checkbox class=frequency_month_on_dates value=31>the 31st</label>
 					</div>
 					<span style=display:none>
-
 						<select class='frequency_month_on_the_key'>
 							<option value=1>first</option>
 							<option value=2>second</option>
@@ -129,7 +123,6 @@ and open the template in the editor.
 							<option value=5>fifth</option>
 							<option value='-1'>last</option>
 						</select>
-
 						<select class='frequency_month_on_the_value'>
 							<option value=SU>Sunday</option>
 							<option value=MO>Monday</option>
@@ -142,14 +135,12 @@ and open the template in the editor.
 							<option value=week_day>Week Day</option>
 							<option value=weekend_day>Weekend Day</option>
 						</select>
-
 					</span>
 				</div>
 				<div style=display:none>
 					Every
 					<input type=number class='yearly_repeat_freq' min=1 value=1>
 					year(s) in
-
 					<div>
 						<label><input type=checkbox class=frequency_year_in_month value=1>Januaruy</label>
 						<label><input type=checkbox class=frequency_year_in_month value=2>February</label>
@@ -164,9 +155,7 @@ and open the template in the editor.
 						<label><input type=checkbox class=frequency_year_in_month value=11>November</label>
 						<label><input type=checkbox class=frequency_year_in_month value=12>December</label>
 					</div>
-
 					on the
-
 					<select class='frequency_year_on_the_key'>
 						<option value=1>First</option>
 						<option value=2>Second</option>
@@ -175,7 +164,6 @@ and open the template in the editor.
 						<option value=5>Fifth</option>
 						<option value=-1>Last</option>
 					</select>
-
 					<select class='frequency_year_on_the_value'>
 						<option value=SU>Sunday</option>
 						<option value=MO>Monday</option>
@@ -188,10 +176,8 @@ and open the template in the editor.
 						<option value=week_day>Week Day</option>
 						<option value=weekend_day>Weekend Day</option>
 					</select>
-
 				</div>
 			</div>
-			
 			<div style=display:none>
 				<label>End Repeat: </label>
 				<select class='simple_end_repeat'>
@@ -207,28 +193,27 @@ and open the template in the editor.
 					<input type=date class='simple_end_repeat_ondate'>
 				</span>
 			</div>
-			
 		</div>
-		<button id='get-rrule-btn'>Generate rrule json</button>
 		
+		
+		<button id='get-rrule-btn'>Generate rrule json</button>
 		<hr>
 		<textarea rows='6' style='width:100%' id='rrule-ta'></textarea>
 		<button id='load-rrule-btn'>populate form from above json</button>
 		
-		<script src='scheduler.js'></script>
-		
+		<script src='RecurComponent.js'></script>
 		<script>
+			var component_div = document.getElementById('recurcomponent');
+			var rc = new RecurComponent(component_div);
 			
 			document.getElementById('get-rrule-btn').onclick = function(){
-				var input = getFormValues(document.querySelector(".rrule-scheduler"));
-				var rrule = generateRRule(input);
+				var rrule = rc.value();
 				document.getElementById('rrule-ta').value = JSON.stringify(rrule, null, 2);
 			};
 			
 			document.getElementById('load-rrule-btn').onclick = function(){
 				var rrule = JSON.parse(document.getElementById('rrule-ta').value);
-				var scheduler_div = document.querySelector(".rrule-scheduler");
-				populateForm(scheduler_div, rrule);
+				rc.value(rrule);
 			};
 		</script>
 		
