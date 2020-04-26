@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+	<head>
+		<title>TODO supply a title</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	</head>
+	<body>
+
+		<h1>RRULE / iCAL VEVENT Generator Example</h2>
+		
+		<p>A very simple, completely unstyled copy of the iCalendar new event form for generating recurrence rules. It includes code to prepopulate the form from existing rrules. For reference and as a starting point for projects that require user to specify complex recurring events.</p>
+		
+		<div class='rrule-scheduler'>
+
+			<div>
+				<label>All day? <input type='checkbox' class=all_day /></label>
+			</div>
+
+			<div>
+				<label>Starts at: </label>
+				<input type=date class=start_date>
+				<input type=time class=start_time>
+			</div>
+
+			<div>
+				<label>Ends at: </label>
+				<input type=date class=end_date>
+				<input type=time class=end_time>
+			</div>
+
+			<div>
+				<label>Repeat: </label>
+				<select class='repeat_type'>
+					<option value=none>None</option>
+					<option value=day>Every Day</option>
+					<option value=week>Every Week</option>
+					<option value=month>Every Month</option>
+					<option value=year>Every Year</option>
+					<option value=custom>Custom</option>
+				</select>
+			</div>
+
+			<div class='frequency_options' style=display:none>
+				<div>
+					<label>Frequency: </label>
+					<select class='frequency'>
+						<option value=daily>Daily</option>
+						<option value=weekly>Weekly</option>
+						<option value=monthly>Monthly</option>
+						<option value=yearly>Yearly</option>
+					</select>
+				</div>
+				<div>
+					Every
+					<input type=number class='daily_repeat_freq' min=1 value=1>
+					day(s)
+				</div>
+				<div style=display:none>
+					Every
+					<input type=number class='weekly_repeat_freq' min=1 value=1>
+					week(s) on
+					<div>
+						<label><input type=checkbox class=frequency_day value=SU>Sunday</label>
+						<label><input type=checkbox class=frequency_day value=MO>Monday</label>
+						<label><input type=checkbox class=frequency_day value=TU>Tuesday</label>
+						<label><input type=checkbox class=frequency_day value=WE>Wednesday</label>
+						<label><input type=checkbox class=frequency_day value=TH>Thursday</label>
+						<label><input type=checkbox class=frequency_day value=FR>Friday</label>
+						<label><input type=checkbox class=frequency_day value=SA>Saturday</label>
+					</div>
+				</div>
+				<div style=display:none>
+					<div>
+						Every
+						<input type=number class='monthly_repeat_freq' min=1 value=1>
+						month(s)
+					</div>
+
+					<select class='frequency_month_type'>
+						<option value=ondates>On date(s)</option>
+						<option value=onthe>On the...</option>
+					</select>
+					<div>
+						<label><input type=checkbox class=frequency_month_on_dates value=1>the 1st</label>
+						<label><input type=checkbox class=frequency_month_on_dates value=2>the 2nd</label>
+						<label><input type=checkbox class=frequency_month_on_dates value=3>the 3rd</label>
+						<label><input type=checkbox class=frequency_month_on_dates value=4>the 4th</label>
+						<label><input type=checkbox class=frequency_month_on_dates value=5>the 5th</label>
+						<label><input type=checkbox class=frequency_month_on_dates value=6>the 6th</label>
+						<label><input type=checkbox class=frequency_month_on_dates value=7>the 7th</label>
+						<label><input type=checkbox class=frequency_month_on_dates value=8>the 8th</label>
+						<label><input type=checkbox class=frequency_month_on_dates value=9>the 9th</label>
+						<label><input type=checkbox class=frequency_month_on_dates value=10>the 10th</label>
+						<label><input type=checkbox class=frequency_month_on_dates value=11>the 11th</label>
+						<label><input type=checkbox class=frequency_month_on_dates value=12>the 12th</label>
+						<label><input type=checkbox class=frequency_month_on_dates value=13>the 13th</label>
+						<label><input type=checkbox class=frequency_month_on_dates value=14>the 14th</label>
+						<label><input type=checkbox class=frequency_month_on_dates value=15>the 15th</label>
+						<label><input type=checkbox class=frequency_month_on_dates value=16>the 16th</label>
+						<label><input type=checkbox class=frequency_month_on_dates value=17>the 17th</label>
+						<label><input type=checkbox class=frequency_month_on_dates value=18>the 18th</label>
+						<label><input type=checkbox class=frequency_month_on_dates value=19>the 19th</label>
+						<label><input type=checkbox class=frequency_month_on_dates value=20>the 20th</label>
+						<label><input type=checkbox class=frequency_month_on_dates value=21>the 21st</label>
+						<label><input type=checkbox class=frequency_month_on_dates value=22>the 22nd</label>
+						<label><input type=checkbox class=frequency_month_on_dates value=23>the 23rd</label>
+						<label><input type=checkbox class=frequency_month_on_dates value=24>the 24th</label>
+						<label><input type=checkbox class=frequency_month_on_dates value=25>the 25th</label>
+						<label><input type=checkbox class=frequency_month_on_dates value=26>the 26th</label>
+						<label><input type=checkbox class=frequency_month_on_dates value=27>the 27th</label>
+						<label><input type=checkbox class=frequency_month_on_dates value=28>the 28th</label>
+						<label><input type=checkbox class=frequency_month_on_dates value=29>the 29th</label>
+						<label><input type=checkbox class=frequency_month_on_dates value=30>the 30th</label>
+						<label><input type=checkbox class=frequency_month_on_dates value=31>the 31st</label>
+					</div>
+					<span style=display:none>
+
+						<select class='frequency_month_on_the_key'>
+							<option value=1>first</option>
+							<option value=2>second</option>
+							<option value=3>third</option>
+							<option value=4>fourth</option>
+							<option value=5>fifth</option>
+							<option value='-1'>last</option>
+						</select>
+
+						<select class='frequency_month_on_the_value'>
+							<option value=SU>Sunday</option>
+							<option value=MO>Monday</option>
+							<option value=TU>Tuesday</option>
+							<option value=WE>Wednesday</option>
+							<option value=TH>Thursday</option>
+							<option value=FR>Friday</option>
+							<option value=SA>Saturday</option>
+							<option value=day>Day</option>
+							<option value=week_day>Week Day</option>
+							<option value=weekend_day>Weekend Day</option>
+						</select>
+
+					</span>
+				</div>
+				<div style=display:none>
+					Every
+					<input type=number class='yearly_repeat_freq' min=1 value=1>
+					year(s) in
+
+					<div>
+						<label><input type=checkbox class=frequency_year_in_month value=1>Januaruy</label>
+						<label><input type=checkbox class=frequency_year_in_month value=2>February</label>
+						<label><input type=checkbox class=frequency_year_in_month value=3>March</label>
+						<label><input type=checkbox class=frequency_year_in_month value=4>April</label>
+						<label><input type=checkbox class=frequency_year_in_month value=5>May</label>
+						<label><input type=checkbox class=frequency_year_in_month value=6>June</label>
+						<label><input type=checkbox class=frequency_year_in_month value=7>July</label>
+						<label><input type=checkbox class=frequency_year_in_month value=8>August</label>
+						<label><input type=checkbox class=frequency_year_in_month value=9>September</label>
+						<label><input type=checkbox class=frequency_year_in_month value=10>October</label>
+						<label><input type=checkbox class=frequency_year_in_month value=11>November</label>
+						<label><input type=checkbox class=frequency_year_in_month value=12>December</label>
+					</div>
+
+					on the
+
+					<select class='frequency_year_on_the_key'>
+						<option value=1>First</option>
+						<option value=2>Second</option>
+						<option value=3>Third</option>
+						<option value=4>Fourth</option>
+						<option value=5>Fifth</option>
+						<option value=-1>Last</option>
+					</select>
+
+					<select class='frequency_year_on_the_value'>
+						<option value=SU>Sunday</option>
+						<option value=MO>Monday</option>
+						<option value=TU>Tuesday</option>
+						<option value=WE>Wednesday</option>
+						<option value=TH>Thursday</option>
+						<option value=FR>Friday</option>
+						<option value=SA>Saturday</option>
+						<option value=day>Day</option>
+						<option value=week_day>Week Day</option>
+						<option value=weekend_day>Weekend Day</option>
+					</select>
+
+				</div>
+			</div>
+			
+			<div style=display:none>
+				<label>End Repeat: </label>
+				<select class='simple_end_repeat'>
+					<option value=never>Never</option>
+					<option value=after>After</option>
+					<option value=ondate>On Date</option>
+				</select>
+				<span style=display:none>
+					<input type=number class='simple_end_repeat_after' min=1 value=1>
+					time(s)
+				</span>
+				<span style=display:none>
+					<input type=date class='simple_end_repeat_ondate'>
+				</span>
+			</div>
+			
+		</div>
+		<button id='get-rrule-btn'>Generate rrule json</button>
+		
+		<hr>
+		<textarea rows='6' style='width:100%' id='rrule-ta'></textarea>
+		<button id='load-rrule-btn'>populate form from above json</button>
+		
+		<script src='scheduler.js'></script>
+		
+		<script>
+			
+			document.getElementById('get-rrule-btn').onclick = function(){
+				var input = getFormValues(document.querySelector(".rrule-scheduler"));
+				var rrule = generateRRule(input);
+				document.getElementById('rrule-ta').value = JSON.stringify(rrule, null, 2);
+			};
+			
+			document.getElementById('load-rrule-btn').onclick = function(){
+				var rrule = JSON.parse(document.getElementById('rrule-ta').value);
+				var scheduler_div = document.querySelector(".rrule-scheduler");
+				populateForm(scheduler_div, rrule);
+			};
+		</script>
+		
+	</body>
+</html>
